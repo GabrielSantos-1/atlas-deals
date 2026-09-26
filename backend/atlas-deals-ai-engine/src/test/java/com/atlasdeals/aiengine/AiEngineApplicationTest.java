@@ -17,7 +17,7 @@ class AiEngineApplicationTest {
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
         .withDatabaseName("atlasdeals")
         .withUsername("atlas")
-        .withPassword("atlas_secret_2024");
+        .withPassword("change_me_local_dev");
 
     @Container
     static RabbitMQContainer rabbitMQ = new RabbitMQContainer("rabbitmq:4-alpine");

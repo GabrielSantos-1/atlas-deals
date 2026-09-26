@@ -53,3 +53,7 @@ docker-data/
 # Test results
 test-results/
 allure-results/
+
+# Env (todos)
+.env.*
+!.env.example

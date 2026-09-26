@@ -22,7 +22,7 @@ services:
     environment:
       POSTGRES_DB: atlasdeals
       POSTGRES_USER: atlas
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
     ports:
       - "5432:5432"
     volumes:
@@ -38,7 +38,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: atlas-redis
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-atlas_redis_2024}
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-change_me_local_dev}
     ports:
       - "6379:6379"
     volumes:
@@ -56,7 +56,7 @@ services:
     container_name: atlas-rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: atlas
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       RABBITMQ_DEFAULT_VHOST: atlasdeals
     ports:
       - "5672:5672"
@@ -148,7 +148,7 @@ services:
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: atlas
-      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD:-atlas_minio_2024}
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD:-change_me_local_dev}
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -169,10 +169,10 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       AUTH_JWT_SECRET: ${JWT_SECRET:-atlas_jwt_secret_2024}
       MANAGEMENT_TRACING_ENABLED: "true"
@@ -203,12 +203,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -240,12 +240,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -277,12 +277,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -314,12 +314,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -351,12 +351,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -388,18 +388,18 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
       MINIO_ENDPOINT: http://minio:9000
-      MINIO_ACCESS_KEY: atlas
-      MINIO_SECRET_KEY: ${MINIO_PASSWORD:-atlas_minio_2024}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-atlas}
+      MINIO_SECRET_KEY: ${MINIO_PASSWORD:-change_me_local_dev}
       SERVER_PORT: 8086
     depends_on:
       postgres:
@@ -428,12 +428,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -465,12 +465,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -502,12 +502,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -539,12 +539,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       AUTH_JWT_SECRET: ${JWT_SECRET:-atlas_jwt_secret_2024}
       MANAGEMENT_TRACING_ENABLED: "true"
@@ -577,12 +577,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       SPRING_OPENSEARCH_URIS: http://opensearch:9200
       MANAGEMENT_TRACING_ENABLED: "true"
@@ -617,12 +617,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -654,12 +654,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -691,12 +691,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/atlasdeals
       SPRING_DATASOURCE_USERNAME: atlas
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev}
       SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-atlas_redis_2024}
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_USERNAME: atlas
-      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318

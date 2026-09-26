@@ -31,7 +31,7 @@ datasources:
     database: atlasdeals
     user: atlas
     secureJsonData:
-      password: atlas_secret_2024
+      password: $POSTGRES_PASSWORD
     jsonData:
       sslmode: disable
       postgresVersion: 1600

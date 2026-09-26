@@ -199,7 +199,7 @@ Cada serviço roda em sua porta individual:
 - Gateway: http://localhost:8080
 - Frontend: http://localhost:3000
 - Grafana: http://localhost:3000 (admin/atlas_grafana_2024)
-- RabbitMQ Management: http://localhost:15672 (atlas/atlas_rabbit_2024)
+- RabbitMQ Management: http://localhost:15672 (usuario: atlas / senha: ver .env)
 
 ---
 

@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/atlasdeals
     username: atlas
-    password: atlas_secret_2024
+    password: ${POSTGRES_PASSWORD:change_me_local_dev}
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
@@ -31,7 +31,7 @@ spring:
     host: localhost
     port: 5672
     username: atlas
-    password: atlas_rabbit_2024
+    password: ${RABBITMQ_PASSWORD:change_me_local_dev}
     virtual-host: atlasdeals
     listener:
       simple:
@@ -44,7 +44,7 @@ spring:
   redis:
     host: localhost
     port: 6379
-    password: atlas_redis_2024
+    password: ${REDIS_PASSWORD:change_me_local_dev}
     timeout: 2000ms
     lettuce:
       pool:

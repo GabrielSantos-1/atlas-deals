@@ -16,7 +16,7 @@ class PublisherApplicationTests {
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16")
         .withDatabaseName("atlasdeals")
         .withUsername("atlas")
-        .withPassword("atlas_secret_2024");
+        .withPassword("change_me_local_dev");
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {

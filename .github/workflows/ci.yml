@@ -20,7 +20,7 @@ jobs:
         env:
           POSTGRES_DB: atlasdeals
           POSTGRES_USER: atlas
-          POSTGRES_PASSWORD: atlas_secret_2024
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD || 'ci_test_only_not_a_secret' }}
         ports:
           - 5432:5432
         options: >-
