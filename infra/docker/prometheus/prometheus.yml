@@ -1,0 +1,79 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'atlas-deals-gateway'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['gateway:8080']
+
+  - job_name: 'atlas-deals-collector'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['collector:8081']
+
+  - job_name: 'atlas-deals-price-history'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['price-history:8082']
+
+  - job_name: 'atlas-deals-promotion-engine'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['promotion-engine:8083']
+
+  - job_name: 'atlas-deals-affiliate-engine'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['affiliate-engine:8084']
+
+  - job_name: 'atlas-deals-ai-engine'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['ai-engine:8085']
+
+  - job_name: 'atlas-deals-publisher'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['publisher:8086']
+
+  - job_name: 'atlas-deals-analytics'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['analytics:8087']
+
+  - job_name: 'atlas-deals-notification'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['notification:8088']
+
+  - job_name: 'atlas-deals-scheduler'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['scheduler:8089']
+
+  - job_name: 'atlas-deals-auth'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['auth:8090']
+
+  - job_name: 'atlas-deals-search'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['search:8091']
+
+  - job_name: 'atlas-deals-user'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['user:8092']
+
+  - job_name: 'atlas-deals-recommendation'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['recommendation:8093']
+
+  - job_name: 'atlas-deals-image-generator'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['image-generator:8094']

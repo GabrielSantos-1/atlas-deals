@@ -1,0 +1,55 @@
+# Java
+*.class
+*.jar
+*.war
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Maven
+.mvn/
+!/**/pom.xml
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.settings/
+.project
+.classpath
+.factorypath
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Node
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Docker
+docker-data/
+*.log
+
+# IDE
+.attach_pid*
+
+# Test results
+test-results/
+allure-results/

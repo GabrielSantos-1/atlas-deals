@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" fill="none">
+  <path d="M20 25C20 11.2 31.2 0 45 0C58.8 0 70 11.2 70 25C70 38.8 58.8 50 45 50C31.2 50 20 38.8 20 25Z" fill="hsl(221.2, 83.2%, 53.3%)"/>
+  <path d="M38 18L45 30L52 18" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="80" y="34" font-family="Inter, sans-serif" font-size="28" font-weight="700" fill="currentColor">Atlas Deals</text>
+</svg>

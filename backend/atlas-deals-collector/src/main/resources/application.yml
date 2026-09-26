@@ -1,0 +1,94 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: atlas-deals-collector
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/atlasdeals
+    username: atlas
+    password: atlas_secret_2024
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: atlas
+    password: atlas_rabbit_2024
+    virtual-host: atlasdeals
+    connection-timeout: 5000
+    template:
+      retry:
+        enabled: true
+        initial-interval: 2000
+        max-attempts: 3
+        multiplier: 2.0
+
+  redis:
+    host: localhost
+    port: 6379
+    password: atlas_redis_2024
+    timeout: 2000
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 4
+        min-idle: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    com.atlasdeals: INFO
+    org.springframework: WARN
+    org.hibernate: WARN
+
+collector:
+  schedule: "0 */15 * * * *"
+  connectors:
+    shopee:
+      enabled: true
+      partner-id: ""
+      affiliate-key: ""
+    amazon:
+      enabled: true
+      access-key: ""
+      secret-key: ""
+      partner-tag: "atlasdeals-20"
+    kabum:
+      enabled: true
+    mercadolivre:
+      enabled: true
+      client-id: ""
+      client-secret: ""

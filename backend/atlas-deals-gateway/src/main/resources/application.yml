@@ -1,0 +1,30 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: atlas-deals-gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "http://localhost:3000"
+            allowed-methods: "*"
+            allowed-headers: "*"
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:atlas_redis_2024}
+app:
+  jwt:
+    secret: ${JWT_SECRET:YXRsYXMtZGVhbHMtand0LXNlY3JldC1rZXktZm9yLXNpZ25pbmctdG9rZW5zLWluLXByb2R1Y3Rpb24=}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus,info
+  metrics:
+    tags:
+      application: ${spring.application.name}

@@ -1,0 +1,54 @@
+server:
+  port: 8092
+
+spring:
+  application:
+    name: atlas-deals-user
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/atlasdeals_user
+    username: ${DB_USER:atlas}
+    password: ${DB_PASSWORD:atlas_secret_2024}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:atlas_redis_2024}
+    timeout: 2000
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 4
+        min-idle: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    com.atlasdeals: INFO
+    org.springframework: WARN
+    org.hibernate: WARN

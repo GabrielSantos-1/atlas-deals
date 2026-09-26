@@ -1,0 +1,109 @@
+server:
+  port: 8094
+
+spring:
+  application:
+    name: atlas-deals-image-generator
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/atlasdeals
+    username: atlas
+    password: atlas_secret_2024
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    open-in-view: false
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: atlas
+    password: atlas_rabbit_2024
+    virtual-host: atlasdeals
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 3000
+          max-attempts: 3
+          multiplier: 2.0
+
+  redis:
+    host: localhost
+    port: 6379
+    password: atlas_redis_2024
+    timeout: 2000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 4
+        min-idle: 2
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  web:
+    resources:
+      static-locations: file:./data/images
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    com.atlasdeals: DEBUG
+    org.springframework.amqp: INFO
+    org.hibernate: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+image:
+  storage:
+    path: ./data/images
+    max-size: 1073741824
+  download:
+    timeout: 30000
+    max-retries: 3
+    user-agent: "AtlasDeals/1.0"
+  processing:
+    quality: 0.85
+    max-dimension: 4096
+  ai:
+    enabled: false
+    provider: openai
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      model: dall-e-3
+      quality: standard
+      size: 1792x1024
+    stability:
+      api-key: ${STABILITY_API_KEY:}
+      engine: stable-diffusion-xl-1024-v1-0
+
+amqp:
+  queue:
+    content-generated: content.generated.q
+    image-generated: image.generated.q

@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  JAVA_VERSION: '21'
+  NODE_VERSION: '20'
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: atlasdeals
+          POSTGRES_USER: atlas
+          POSTGRES_PASSWORD: atlas_secret_2024
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      rabbitmq:
+        image: rabbitmq:4-alpine
+        ports:
+          - 5672:5672
+        options: >-
+          --health-cmd "rabbitmq-diagnostics check_port_connectivity"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Backend Build & Test
+        run: mvn clean verify -B
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          RABBITMQ_HOST: localhost
+          RABBITMQ_PORT: 5672
+
+      - name: Frontend Build & Lint
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run lint
+          npm run build
+
+      - name: Upload Backend Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-backend
+          path: '**/target/surefire-reports/'
+
+      - name: Upload Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: '**/target/site/jacoco/'

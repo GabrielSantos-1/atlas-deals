@@ -1,0 +1,102 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: atlas-deals-publisher
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/atlasdeals
+    username: atlas
+    password: atlas_secret_2024
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: atlas
+    password: atlas_rabbit_2024
+    virtual-host: atlasdeals
+
+  redis:
+    host: localhost
+    port: 6379
+    password: atlas_redis_2024
+    timeout: 2000ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0
+
+publisher:
+  concurrent-publishers: 3
+  max-retries: 3
+  retry-backoff-ms: 1000
+  queue-poll-interval-ms: 30000
+  schedule-poll-interval-ms: 60000
+  retry-interval-ms: 300000
+  platforms:
+    telegram:
+      enabled: false
+      bot-token: ""
+      chat-id: ""
+    whatsapp:
+      enabled: false
+      phone-number-id: ""
+      access-token: ""
+    instagram:
+      enabled: false
+      page-id: ""
+      access-token: ""
+    facebook:
+      enabled: false
+      webhook-url: ""
+      access-token: ""
+    threads:
+      enabled: false
+      webhook-url: ""
+      access-token: ""
+    twitter:
+      enabled: false
+      webhook-url: ""
+      api-key: ""
+      api-secret: ""
+      access-token: ""
+      access-token-secret: ""
+    discord:
+      enabled: false
+      webhook-url: ""
+    newsletter:
+      enabled: false
+      webhook-url: ""
+      api-key: ""
+    push:
+      enabled: false
+      webhook-url: ""
+      api-key: ""
+    site:
+      enabled: true
+      base-url: "https://atlasdeals.com.br"
+      output-dir: "${app.home:./data}/site/pages"

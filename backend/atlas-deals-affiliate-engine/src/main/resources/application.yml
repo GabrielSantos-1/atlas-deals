@@ -1,0 +1,51 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: atlas-deals-affiliate-engine
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/atlasdeals
+    username: atlas
+    password: atlas_secret_2024
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: atlas
+    password: atlas_rabbit_2024
+    virtual-host: atlasdeals
+
+  redis:
+    host: localhost
+    port: 6379
+    password: atlas_redis_2024
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+
+affiliate:
+  default-campaign: atlas-deals
+  shopee:
+    partner-id: ""
+  amazon:
+    partner-tag: "atlasdeals-20"
+    access-key: ""
+    secret-key: ""
+  mercadolivre:
+    tool-id: ""
+  kabum:
+    partner-id: ""
+  aliexpress:
+    affiliate-tag: ""

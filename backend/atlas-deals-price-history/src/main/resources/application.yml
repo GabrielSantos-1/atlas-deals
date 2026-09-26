@@ -1,0 +1,60 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: atlas-deals-price-history
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/atlasdeals
+    username: atlas
+    password: atlas_secret_2024
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+    open-in-view: false
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: atlas
+    password: atlas_rabbit_2024
+    virtual-host: atlasdeals
+
+  redis:
+    host: localhost
+    port: 6379
+    password: atlas_redis_2024
+    timeout: 2000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+
+  cache:
+    type: redis
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0

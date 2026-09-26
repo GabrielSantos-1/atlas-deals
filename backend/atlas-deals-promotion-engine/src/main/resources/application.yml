@@ -1,0 +1,85 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: atlas-deals-promotion-engine
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/atlasdeals
+    username: atlas
+    password: atlas_secret_2024
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: atlas
+    password: atlas_rabbit_2024
+    virtual-host: atlasdeals
+
+  redis:
+    host: localhost
+    port: 6379
+    password: atlas_redis_2024
+    timeout: 2000ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0
+
+promotion:
+  min-discount-percent: 5
+  score-threshold: 30
+  expiration-days: 7
+  max-results-per-page: 50
+  rules:
+    discount-depth:
+      enabled: true
+      weight: 2.5
+    lowest-price-30d:
+      enabled: true
+      weight: 2.0
+    lowest-price-historical:
+      enabled: true
+      weight: 1.5
+    coupon-available:
+      enabled: true
+      weight: 1.0
+    high-conversion:
+      enabled: true
+      weight: 1.5
+    store-reputation:
+      enabled: true
+      weight: 1.0
+    stock-available:
+      enabled: true
+      weight: 0.5
+    popular-product:
+      enabled: true
+      weight: 1.5
+    shipping-free:
+      enabled: true
+      weight: 0.5

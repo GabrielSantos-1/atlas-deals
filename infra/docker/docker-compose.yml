@@ -1,0 +1,158 @@
+version: "3.9"
+
+networks:
+  atlas-deals-net:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+  rabbitmq-data:
+  opensearch-data:
+  prometheus-data:
+  grafana-data:
+  loki-data:
+  minio-data:
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: atlas-postgres
+    environment:
+      POSTGRES_DB: atlasdeals
+      POSTGRES_USER: atlas
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-atlas_secret_2024}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - atlas-deals-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U atlas -d atlasdeals"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: atlas-redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-atlas_redis_2024}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - atlas-deals-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    container_name: atlas-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: atlas
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-atlas_rabbit_2024}
+      RABBITMQ_DEFAULT_VHOST: atlasdeals
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - atlas-deals-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  opensearch:
+    image: opensearchproject/opensearch:2.18.0
+    container_name: atlas-opensearch
+    environment:
+      discovery.type: single-node
+      plugins.security.disabled: true
+      OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    networks:
+      - atlas-deals-net
+
+  prometheus:
+    image: prom/prometheus:v2.55.0
+    container_name: atlas-prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - atlas-deals-net
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--web.enable-lifecycle"
+
+  grafana:
+    image: grafana/grafana:11.3.0
+    container_name: atlas-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-atlas_grafana_2024}
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - atlas-deals-net
+
+  loki:
+    image: grafana/loki:3.2.1
+    container_name: atlas-loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/loki-config.yml
+      - loki-data:/loki
+    networks:
+      - atlas-deals-net
+    command: -config.file=/etc/loki/loki-config.yml
+
+  tempo:
+    image: grafana/tempo:2.6.1
+    container_name: atlas-tempo
+    command: ["-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./tempo/tempo.yml:/etc/tempo.yaml
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+    networks:
+      - atlas-deals-net
+
+  minio:
+    image: minio/minio:latest
+    container_name: atlas-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: atlas
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD:-atlas_minio_2024}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - atlas-deals-net
