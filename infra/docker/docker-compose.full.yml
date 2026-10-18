@@ -108,7 +108,7 @@ services:
     container_name: atlas-grafana
     environment:
       GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-atlas_grafana_2024}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-change_me_local_dev}
       GF_INSTALL_PLUGINS: grafana-piechart-panel
     volumes:
       - ./grafana/datasources:/etc/grafana/provisioning/datasources
@@ -174,7 +174,7 @@ services:
       SPRING_RABBITMQ_USERNAME: atlas
       SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
-      AUTH_JWT_SECRET: ${JWT_SECRET:-atlas_jwt_secret_2024}
+      JWT_SECRET: ${JWT_SECRET:-Y2hhbmdlX21lX2xvY2FsX2Rldl9qd3Rfc2VjcmV0X292ZXJyaWRlXzMyX2J5dGVz}
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
       SERVER_PORT: 8080
@@ -546,7 +546,7 @@ services:
       SPRING_RABBITMQ_USERNAME: atlas
       SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-change_me_local_dev}
       SPRING_RABBITMQ_VIRTUAL_HOST: atlasdeals
-      AUTH_JWT_SECRET: ${JWT_SECRET:-atlas_jwt_secret_2024}
+      JWT_SECRET: ${JWT_SECRET:-Y2hhbmdlX21lX2xvY2FsX2Rldl9qd3Rfc2VjcmV0X292ZXJyaWRlXzMyX2J5dGVz}
       MANAGEMENT_TRACING_ENABLED: "true"
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
       SERVER_PORT: 8090

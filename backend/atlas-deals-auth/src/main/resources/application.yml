@@ -21,7 +21,7 @@ spring:
     password: ${REDIS_PASSWORD:change_me_local_dev}
 app:
   jwt:
-    secret: ${JWT_SECRET:YXRsYXMtZGVhbHMtand0LXNlY3JldC1rZXktZm9yLXNpZ25pbmctdG9rZW5zLWluLXByb2R1Y3Rpb24=}
+    secret: ${JWT_SECRET:Y2hhbmdlX21lX2xvY2FsX2Rldl9qd3Rfc2VjcmV0X292ZXJyaWRlXzMyX2J5dGVz}
     access-token-expiration: 900000
     refresh-token-expiration: 604800000
 management:

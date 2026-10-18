@@ -107,7 +107,7 @@ services:
     container_name: atlas-grafana
     environment:
       GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-atlas_grafana_2024}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-change_me_local_dev}
       GF_INSTALL_PLUGINS: grafana-piechart-panel
     volumes:
       - ./grafana/datasources:/etc/grafana/provisioning/datasources
