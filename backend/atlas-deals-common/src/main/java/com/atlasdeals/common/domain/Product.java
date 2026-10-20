@@ -1,6 +1,7 @@
 package com.atlasdeals.common.domain;
 
 import com.atlasdeals.common.domain.events.ProductCollectedEvent;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;

@@ -125,21 +125,21 @@ public class PublisherController {
     }
 
     private Map<String, Object> toResponse(Publication publication) {
-        return Map.of(
-            "id", publication.getId(),
-            "productId", publication.getProductId(),
-            "platform", publication.getPlatform(),
-            "platformPostId", publication.getPlatformPostId() != null ? publication.getPlatformPostId() : "",
-            "status", publication.getStatus().name(),
-            "content", publication.getContent() != null ? publication.getContent() : "",
-            "errorMessage", publication.getErrorMessage() != null ? publication.getErrorMessage() : "",
-            "scheduledFor", publication.getScheduledFor() != null ? publication.getScheduledFor().toString() : "",
-            "publishedAt", publication.getPublishedAt() != null ? publication.getPublishedAt().toString() : "",
-            "retryCount", publication.getRetryCount(),
-            "maxRetries", publication.getMaxRetries(),
-            "createdAt", publication.getCreatedAt().toString(),
-            "updatedAt", publication.getUpdatedAt().toString()
-        );
+        Map<String, Object> response = new java.util.LinkedHashMap<>();
+        response.put("id", publication.getId());
+        response.put("productId", publication.getProductId());
+        response.put("platform", publication.getPlatform());
+        response.put("platformPostId", publication.getPlatformPostId() != null ? publication.getPlatformPostId() : "");
+        response.put("status", publication.getStatus().name());
+        response.put("content", publication.getContent() != null ? publication.getContent() : "");
+        response.put("errorMessage", publication.getErrorMessage() != null ? publication.getErrorMessage() : "");
+        response.put("scheduledFor", publication.getScheduledFor() != null ? publication.getScheduledFor().toString() : "");
+        response.put("publishedAt", publication.getPublishedAt() != null ? publication.getPublishedAt().toString() : "");
+        response.put("retryCount", publication.getRetryCount());
+        response.put("maxRetries", publication.getMaxRetries());
+        response.put("createdAt", publication.getCreatedAt().toString());
+        response.put("updatedAt", publication.getUpdatedAt().toString());
+        return response;
     }
 
     public record PublishRequestDTO(

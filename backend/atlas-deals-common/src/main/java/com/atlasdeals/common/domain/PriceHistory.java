@@ -2,6 +2,7 @@ package com.atlasdeals.common.domain;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Objects;
 
 public final class PriceHistory extends ValueObject {
     private final ProductId productId;
@@ -54,6 +55,33 @@ public final class PriceHistory extends ValueObject {
     public String getModel() { return model; }
     public boolean isInStock() { return inStock; }
     public Instant getRecordedAt() { return recordedAt; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PriceHistory that = (PriceHistory) o;
+        return inStock == that.inStock
+            && Objects.equals(productId, that.productId)
+            && Objects.equals(price, that.price)
+            && Objects.equals(cashPrice, that.cashPrice)
+            && Objects.equals(installmentPrice, that.installmentPrice)
+            && Objects.equals(installmentCount, that.installmentCount)
+            && Objects.equals(coupon, that.coupon)
+            && Objects.equals(shippingCost, that.shippingCost)
+            && Objects.equals(storeId, that.storeId)
+            && Objects.equals(storeName, that.storeName)
+            && Objects.equals(category, that.category)
+            && Objects.equals(brand, that.brand)
+            && Objects.equals(model, that.model)
+            && Objects.equals(recordedAt, that.recordedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId, price, cashPrice, installmentPrice, installmentCount,
+            coupon, shippingCost, storeId, storeName, category, brand, model, inStock, recordedAt);
+    }
 
     public static class Builder {
         private ProductId productId;

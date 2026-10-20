@@ -1,12 +1,16 @@
 package com.atlasdeals.common.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 import java.util.UUID;
 
 public final class ProductId extends ValueObject {
     private final UUID value;
 
-    private ProductId(UUID value) {
+    @JsonCreator
+    private ProductId(@JsonProperty("value") UUID value) {
         this.value = Objects.requireNonNull(value, "ProductId must not be null");
     }
 

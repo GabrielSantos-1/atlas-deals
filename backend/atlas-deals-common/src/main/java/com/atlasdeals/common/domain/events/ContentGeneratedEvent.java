@@ -2,28 +2,44 @@ package com.atlasdeals.common.domain.events;
 
 import com.atlasdeals.common.domain.BaseDomainEvent;
 import com.atlasdeals.common.domain.ProductId;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.math.BigDecimal;
 import java.util.Map;
 
+@JsonAutoDetect(
+    fieldVisibility = JsonAutoDetect.Visibility.ANY,
+    getterVisibility = JsonAutoDetect.Visibility.PUBLIC_ONLY,
+    isGetterVisibility = JsonAutoDetect.Visibility.PUBLIC_ONLY
+)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ContentGeneratedEvent extends BaseDomainEvent {
-    private final ProductId productId;
-    private final Map<String, String> contentByPlatform;
-    private final String title;
-    private final String description;
-    private final String summary;
-    private final String seoDescription;
-    private final String hashtags;
-    private final String category;
-    private final String tags;
-    private final String opportunityLevel;
-    private final String technicalSummary;
-    private final String pros;
-    private final String cons;
-    private final String recommendedProfile;
-    private final String imageUrl;
-    private final String storeName;
-    private final BigDecimal price;
-    private final BigDecimal originalPrice;
+    private ProductId productId;
+    private Map<String, String> contentByPlatform;
+    private String title;
+    private String description;
+    private String summary;
+    private String seoDescription;
+    private String hashtags;
+    private String category;
+    private String tags;
+    private String opportunityLevel;
+    private String technicalSummary;
+    private String pros;
+    private String cons;
+    private String recommendedProfile;
+    private String imageUrl;
+    private String storeName;
+    private BigDecimal price;
+    private BigDecimal originalPrice;
+
+    /**
+     * Required by Jackson to rebuild the event from a message payload. The event identity
+     * (eventId/occurredOn) is restored from the JSON instead of being regenerated.
+     */
+    protected ContentGeneratedEvent() {
+    }
 
     public ContentGeneratedEvent(ProductId productId, Map<String, String> contentByPlatform,
                                  String title, String description, String summary,

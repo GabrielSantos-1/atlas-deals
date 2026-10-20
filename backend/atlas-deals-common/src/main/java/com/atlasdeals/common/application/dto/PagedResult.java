@@ -12,7 +12,7 @@ public record PagedResult<T>(
     int totalPages,
     boolean first,
     boolean last,
-    boolean empty
+    boolean isEmpty
 ) {
     public PagedResult {
         content = content != null ? Collections.unmodifiableList(content) : List.of();
@@ -31,9 +31,13 @@ public record PagedResult<T>(
     }
 
     public <U> PagedResult<U> map(Function<? super T, ? extends U> converter) {
+        List<U> mapped = new java.util.ArrayList<>(content.size());
+        for (T item : content) {
+            mapped.add(converter.apply(item));
+        }
         return new PagedResult<>(
-            content.stream().map(converter).toList(),
-            page, size, totalElements, totalPages, first, last, empty
+            mapped,
+            page, size, totalElements, totalPages, first, last, isEmpty
         );
     }
 }
